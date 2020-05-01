@@ -1,16 +1,16 @@
 <?php
   $name=$password=$email='';
-  $ermsg = array('name'=>'','mail'=>'','pass'=>'');
+  $ermsg = array('name'=>'','mail'=>'','pass'=>''); #error messages list
   if (isset($_POST['submit'])) {
     $name = htmlspecialchars($_POST['user_name']);
-    if (filter_var(htmlspecialchars($_POST['user_email']),FILTER_VALIDATE_EMAIL)){
+    if (filter_var(htmlspecialchars($_POST['user_email']),FILTER_VALIDATE_EMAIL)){ #checking validity of email 
       $email =  htmlspecialchars($_POST['user_email']);
     }
     else{
       $ermsg['mail'] = 'Enter valid email';
     }
     $password = htmlspecialchars($_POST['user_password1']);
-    if (!array_filter($ermsg)) {
+    if (!array_filter($ermsg)) { 
       header("Location: home.php?user=".$name);
     }
     
@@ -51,13 +51,14 @@
         <button type="submit" name="submit">Sign Up</button>
       </form>
       <script>
-        function validate() {
+        function validate() { //validating password
           var pass1 = document.getElementById('password1').value;
           var pass2 = document.getElementById('password2').value;
           if (pass1 == pass2) {
             min = 6;
-            regex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{6,}$/;
-            if (!regex.test(pass1)) {
+            regex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{6,}$/; //regular expression for password
+            //regular expression defines how the password should be
+            if (!regex.test(pass1)) { //checking password with regular expression
               document.getElementById("error").innerHTML = "Password must contain atleast one specail character,number and uppercase letter(mininum length must be 6)";
               return false;
             }
