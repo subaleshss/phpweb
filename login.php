@@ -1,10 +1,10 @@
 <?php
   $err='';
-  if (isset($_POST['submit'])) {
+  if (isset($_POST['submit'])) {  #accepting values from form
     $email = htmlspecialchars($_POST['user_email']);
     $password = htmlspecialchars($_POST['user_password']);
     if ($password == 'Hello1$') {
-      header("Location: home.php?user=".$email);
+      header("Location: home.php?user=".$email); #redirecting to home page after validation
     }
     else{
       $err = 'invalid password';
@@ -33,7 +33,7 @@
           
           <label for="password">Password:</label>
           <input type="password" id="password" name="user_password" required>
-          <div class="red"><?php echo $err;?></div>
+          <div class="red"><?php echo $err;?></div> <!--printing error message-->
 
         </fieldset>
         <button type="submit" name="submit">Login</button>
