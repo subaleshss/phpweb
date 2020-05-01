@@ -9,6 +9,12 @@ body {
   color: #384047;
 }
 
+.red{
+  color: red;
+  font-style: italic;
+}
+
+
 form {
   max-width: 300px;
   margin: 10px auto;

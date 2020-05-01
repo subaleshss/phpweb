@@ -1,25 +1,15 @@
 <?php
-  /*if(isset($_POST['user_email'])){
-    $email_1 = $_POST['user_email']; 
-  }
-  else{
-    $email_1 = "Email not set in GET Method";
-  }
-  if(isset($_POST['user_password'])){
-            $password_1 = $_POST['user_password']; 
-  }
-  else{
-          $password_1 = "<br>password not set in GET Method";
-    echo $password_1;
-  }
-  echo $email;*/
-  if(isset($_POST['submit'])){
+  $err='';
+  if (isset($_POST['submit'])) {
     $email = htmlspecialchars($_POST['user_email']);
-    $pass = htmlspecialchars($_POST['user_password');
-    echo $email;
-    echo $pass;
+    $password = htmlspecialchars($_POST['user_password']);
+    if ($password == 'Hello1$') {
+      header("Location: home.php?user=".$email);
+    }
+    else{
+      $err = 'invalid password';
+    }
   }
-
 ?>
  <html>
  <head>
@@ -32,29 +22,24 @@
     </head>
     <body>
 
-      <form action="login.php" method="post">
+      <form action="login.php" method="post" id="fo" name="fo" >
       
         <h1>Login</h1>
         
         <fieldset>
           
           <label for="mail">Email:</label>
-          <input type="email" id="mail" name="user_email">
+          <input type="email" id="mail" name="user_email" required>
           
           <label for="password">Password:</label>
-          <input type="password" id="password" name="user_password">
+          <input type="password" id="password" name="user_password" required>
+          <div class="red"><?php echo $err;?></div>
 
         </fieldset>
         <button type="submit" name="submit">Login</button>
         or sign up
-        <a href="E:/web%20tech/signup.html" id="signup">here</a>
+        <a href="signup.php" >here</a>
 
       </form>
-      <script>
-        id = document.getElementById('signup')
-        id.addEventListener('click',function(){
-          document.location.href = 'signup.php'
-        })
-      </script>
     </body>
 </html>

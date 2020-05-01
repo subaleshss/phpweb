@@ -53,6 +53,11 @@ input[type="checkbox"] {
   margin: 0 4px 8px 0;
 }
 
+.red{
+  color: red;
+  font-style: italic;
+}
+
 select {
   padding: 6px;
   height: 32px;
