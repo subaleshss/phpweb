@@ -58,7 +58,7 @@
             min = 6;
             regex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{6,}$/;
             if (!regex.test(pass1)) {
-              document.getElementById("error").innerHTML = "Password must contain atleast one specail character,number and uppercase letter";
+              document.getElementById("error").innerHTML = "Password must contain atleast one specail character,number and uppercase letter(mininum length must be 6)";
               return false;
             }
             else{
