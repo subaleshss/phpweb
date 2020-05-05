@@ -1,15 +1,41 @@
 <?php
+  $conn = mysqli_connect('127.0.0.1','Admin','qwertyuiop','webuser'); #connecting with database
+  if (!$conn) {
+    echo "not connected".mysqli_connect_error();
+  }
+  $sql = 'SELECT name, email, password from users '; 
+
+  $result = mysqli_query($conn, $sql); 
+
+  $users = mysqli_fetch_all($result, MYSQLI_ASSOC); #stores the results in the form of an array 
+
+  mysqli_free_result($result);
+
+  mysqli_close($conn);
+ 
+
   $err='';
-  if (isset($_POST['submit'])) {  #accepting values from form
-    $email = htmlspecialchars($_POST['user_email']);
+  if (isset($_POST['submit'])) {
+    $email = htmlspecialchars($_POST['user_email']); #getting all data entered using form
     $password = htmlspecialchars($_POST['user_password']);
-    if ($password == 'Hello1$') {
-      header("Location: home.php?user=".$email); #redirecting to home page after validation
-    }
-    else{
-      $err = 'invalid password';
+    foreach ($users as $user){ #validating if such an user exist in db using the array 
+      if (htmlspecialchars($user['email'] == $email)) {
+        echo "in1";
+        if (htmlspecialchars($user['password'] == $password)) {
+          echo "in12";
+          $name = $user['name'];
+          header("Location: home.php?user=".$name);  
+        }
+        else{
+          $err = "Invalid credentials";
+        }
+      }
+      else{
+        $err = "Invalid credentials";
+      }
     }
   }
+
 ?>
  <html>
  <head>
