@@ -1,4 +1,5 @@
 <?php
+  include('connecttodb.php');
   $name=$password=$email='';
   $ermsg = array('name'=>'','mail'=>'','pass'=>''); #error messages list
   if (isset($_POST['submit'])) {

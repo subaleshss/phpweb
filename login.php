@@ -1,8 +1,5 @@
 <?php
-  $conn = mysqli_connect('127.0.0.1','Admin','qwertyuiop','webuser'); #connecting with database
-  if (!$conn) {
-    echo "not connected".mysqli_connect_error();
-  }
+  include('connecttodb.php');
   $sql = 'SELECT name, email, password from users '; 
 
   $result = mysqli_query($conn, $sql); 
@@ -20,9 +17,7 @@
     $password = htmlspecialchars($_POST['user_password']);
     foreach ($users as $user){ #validating if such an user exist in db using the array 
       if (htmlspecialchars($user['email'] == $email)) {
-        echo "in1";
         if (htmlspecialchars($user['password'] == $password)) {
-          echo "in12";
           $name = $user['name'];
           header("Location: home.php?user=".$name);  
         }
