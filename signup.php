@@ -12,7 +12,18 @@
     }
     $password = htmlspecialchars($_POST['user_password1']);
     if (!array_filter($ermsg)) { 
-      header("Location: home.php?user=".$name);
+      $name = mysqli_real_escape_string($conn,$_POST['user_name']);
+      $email = mysqli_real_escape_string($conn,$_POST['user_email']);
+      $password = mysqli_real_escape_string($conn,$_POST['user_password1']);
+
+      $sql= "INSERT INTO users(name,email,password) VALUES('$name','$email','$password') " ;
+      if(mysqli_query($conn,$sql)){
+        header("Location: home.php?user=".$name);
+      }
+      else{
+        echo "saving values to db failed";
+      }
+      
     }
     
   }
@@ -51,6 +62,10 @@
         </fieldset>
         <button type="submit" name="submit">Sign Up</button>
       </form>
+
+
+      <!-- client side scripting for validating password and checking the format of apssword -->
+      
       <script>
         function validate() { //validating password
           var pass1 = document.getElementById('password1').value;
